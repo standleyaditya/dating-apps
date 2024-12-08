@@ -94,7 +94,7 @@ $ npm run start:dev
 #### AUTH
 | HTTP Verbs | Endpoints | Action |
 | --- | --- | --- |
-| GET | /auth/login | Login to existing user account |
+| POST | /auth/login | Login to existing user account |
 | POST | /auth/signup | Create new Account |
 | POST | /auth/signout | Sign out from session |
 
