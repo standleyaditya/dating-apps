@@ -24,7 +24,17 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+The Structure I'm using is 5 table that includes :
+# Package {
+  id : int;
+  name : string;
+  price: int;
+  desc : string;
+  created_at : timestamp;
+  updated_at : timestamp;
+  deleted_at : timestamp;
+}
+#
 
 ## Project setup
 
