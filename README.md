@@ -69,6 +69,16 @@ swipe {
 }
 ```
 #
+### API Endpoints
+| HTTP Verbs | Endpoints | Action |
+| --- | --- | --- |
+| POST | /api/user/signup | To sign up a new user account |
+| POST | /api/user/login | To login an existing user account |
+| POST | /api/causes | To create a new cause |
+| GET | /api/causes | To retrieve all causes on the platform |
+| GET | /api/causes/:causeId | To retrieve details of a single cause |
+| PATCH | /api/causes/:causeId | To edit the details of a single cause |
+| DELETE | /api/causes/:causeId | To delete a single cause |
 
 ## Project setup
 
