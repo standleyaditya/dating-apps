@@ -70,15 +70,33 @@ swipe {
 ```
 #
 ### API Endpoints
+
+#AUTH
 | HTTP Verbs | Endpoints | Action |
 | --- | --- | --- |
-| POST | /api/user/signup | To sign up a new user account |
-| POST | /api/user/login | To login an existing user account |
-| POST | /api/causes | To create a new cause |
-| GET | /api/causes | To retrieve all causes on the platform |
-| GET | /api/causes/:causeId | To retrieve details of a single cause |
-| PATCH | /api/causes/:causeId | To edit the details of a single cause |
-| DELETE | /api/causes/:causeId | To delete a single cause |
+| GET | /auth/login | Login to existing user account |
+| POST | /auth/signup | Create new Account |
+| POST | /auth/signout | Sign out from session |
+
+#USERS
+| HTTP Verbs | Endpoints | Action |
+| --- | --- | --- |
+| GET | /users/ | Get all users data |
+| GET | /users/:id | Get user by id |
+| POST | /users/ | Create User |
+| PUT | /usesr/ | Edit your user attribute |
+| PATCH | /users/ | Restore user that have been soft deleted |
+| DELETE | /users/ | Soft delete user |
+
+#PROFILES
+| HTTP Verbs | Endpoints | Action |
+| --- | --- | --- |
+| GET | /profiles/ | Get all profile data |
+| GET | /profiles/:id | Get profile by id |
+| POST | /profiles/ | Create profile |
+| PUT | /profiles/ | Edit your profile attribute |
+| PATCH | /profiles/ | Restore profile that have been soft deleted |
+| DELETE | /profiles/ | Soft delete profile |
 
 ## Project setup
 
