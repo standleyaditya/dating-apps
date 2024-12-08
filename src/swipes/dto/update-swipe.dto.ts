@@ -1,4 +1,6 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateSwipeDto } from './create-swipe.dto';
+import { IsNotEmpty } from 'class-validator';
 
-export class UpdateSwipeDto extends PartialType(CreateSwipeDto) {}
+export class UpdateSwipeDto {
+  @IsNotEmpty({ message: 'profile id is required' })
+  action: string;
+}

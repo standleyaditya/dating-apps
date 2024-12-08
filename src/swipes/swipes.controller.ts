@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { SwipesService } from './swipes.service';
 import { CreateSwipeDto } from './dto/create-swipe.dto';
 import { UpdateSwipeDto } from './dto/update-swipe.dto';

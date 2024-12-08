@@ -29,7 +29,7 @@ export class Profile {
   @Column()
   age: number;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column({ nullable: true })
   last_swiped_at: Date;
 
   @CreateDateColumn()
