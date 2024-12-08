@@ -26,6 +26,23 @@
 
 The Structure I'm using is 5 table that includes :
 ```bash
+User {
+  user_id : UUID;
+  username : string;
+  email : string;
+  password : string;
+}
+
+Profiles {
+  profile_id : int;
+  user_id : UUID;
+  fullname : string;
+  bio : string;
+  age: int;
+  swipe_count int;
+  last_swiped_at timestamp;
+}
+
 Package {
   id : int;
   name : string;
@@ -34,6 +51,21 @@ Package {
   created_at : timestamp;
   updated_at : timestamp;
   deleted_at : timestamp;
+}
+
+Premium {
+  premium_id : int;
+  user_id : uuid;
+  package_id : int;
+  subscription_date : timestamp;
+}
+
+swipe {
+  swipe_id : int;
+  profile_id : int;
+  swiped_id : int;
+  action : string;
+  swiped_at : timestamp;
 }
 ```
 #
