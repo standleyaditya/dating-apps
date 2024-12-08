@@ -25,7 +25,7 @@
 ## Description
 
 The Structure I'm using is 5 table that includes :
-```json
+```sql
 User {
   user_id : UUID;
   username : string;
