@@ -83,10 +83,10 @@ $ npm migration:run
 
 ```bash
 # development
-$ npm run start (will auto start db migration)
+$ npm run start 
 
 # watch mode
-$ npm run start:dev
+$ npm run start:dev (will auto start db migration)
 ```
 
 ### API Endpoints
