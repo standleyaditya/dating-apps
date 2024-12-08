@@ -76,68 +76,43 @@ export class SwipesService {
       await this.profileRepository.save(profile);
     }
     if (profile.swipe_count > 0 || profile.user.premium) {
-      console.log(profile_id);
-      const allProfiles = await this.profileRepository
+      const allProfile = await this.profileRepository
         .createQueryBuilder('profile')
-        .leftJoinAndSelect('profile.swipedProfiles', 'swipe')
-        .leftJoinAndSelect('swipe.profile', 'swipes')
-        .where('profile.profile_id <> :profile_id', { profile_id })
-        // .where('swipe.profileProfileId != :profile_id', {
-        //   profile_id: profile_id,
-        // })
-        // .orWhere('swipe.profileProfileId IS NULL')
-        .andWhere(
-          new Brackets((qb) => {
-            qb.where('swipe.profileProfileId != :profile_id', {
-              profile_id: profile_id,
-            }).orWhere('swipe.profileProfileId IS NULL');
-          }),
+        .leftJoin(
+          'profile.swipedProfiles',
+          'swiped',
+          'swiped.profileProfileId = :profile_id',
+          {
+            profile_id: profile_id,
+          },
         )
-
-        // .andWhere('swipe.profileProfileId <> :profile_id', {
-        //   profile_id: profile_id,
-        // })
-        // .andWhere('profile.profile_id <> :profile_id', { profile_id })
-        // .andWhere('swipes.profile_id IS NULL')
-        // .orWhere('swipes.profile_id <> :profile_id', { profile_id })
-        // .andWhere('swipe.swipedProfileId <> :profile_id', { profile_id })
-        // .andWhere('profile.profile_id <> :profile_id', { profile_id })
+        .where('profile.profile_Id != :profile_id', {
+          profile_id: profile_id,
+        })
+        .andWhere('swiped.swipe_id IS NULL')
         .getMany();
-      console.log(allProfiles);
-      const randomIndex = Math.floor(Math.random() * allProfiles.length);
-      const swiped = allProfiles[randomIndex];
+      console.log(allProfile);
+      const randomIndex = Math.floor(Math.random() * allProfile.length);
+      const swiped = allProfile[randomIndex];
       if (!swiped) {
         return { message: 'No Profile to Swipe' };
       }
-      const payload = this.swipeRepository.create({
+      const result = this.swipeRepository.create({
         profile,
         swiped,
       });
-      await this.swipeRepository.save(payload);
+      await this.swipeRepository.save(result);
       profile.swipe_count = profile.swipe_count - 1;
       await this.profileRepository.save(profile);
-      return { Data: payload };
+      return { Data: result };
     }
   }
   async findAll() {
-    return await this.profileRepository
-      .createQueryBuilder('profile')
-      .leftJoinAndSelect('profile.swipedProfiles', 'swipe')
+    return this.swipeRepository
+      .createQueryBuilder('swipe')
       .leftJoinAndSelect('swipe.profile', 'swipes')
-      .andWhere('swipe.profileProfileId != :profile_id', {
-        profile_id: 1,
-      })
-      .orWhere('swipe.profileProfileId IS NULL')
-      // .andWhere('profile.profile_id <> :profile_id', { profile_id })
-      // .andWhere('swipes.profile_id IS NULL')
-      // .orWhere('swipes.profile_id <> :profile_id', { profile_id })
-      // .andWhere('swipe.swipedProfileId <> :profile_id', { profile_id })
-      // .andWhere('profile.profile_id <> :profile_id', { profile_id })
+      .leftJoinAndSelect('swipes.swipedProfiles', 'swiped')
       .getMany();
-    // .leftJoin('user.premium', 'premium', '"premium".status = :status', {
-    //   status: 'active',
-    // })
-    // .where('profile.profile_id = :profile_id', { profile_id })
   }
 
   findOne(id: number) {
