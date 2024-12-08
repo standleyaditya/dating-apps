@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Put,
+} from '@nestjs/common';
 import { PremiumsService } from './premiums.service';
 import { CreatePremiumDto } from './dto/create-premium.dto';
 import { UpdatePremiumDto } from './dto/update-premium.dto';
@@ -22,13 +31,18 @@ export class PremiumsController {
     return this.premiumsService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePremiumDto: UpdatePremiumDto) {
+  @Put(':id')
+  update(@Param('id') id: number, @Body() updatePremiumDto: UpdatePremiumDto) {
     return this.premiumsService.update(+id, updatePremiumDto);
+  }
+
+  @Patch(':id')
+  restore(@Param('id') id: string) {
+    return this.premiumsService.restore(+id);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.premiumsService.remove(+id);
+    return this.premiumsService.softDelete(+id);
   }
 }

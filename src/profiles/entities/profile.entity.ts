@@ -7,6 +7,7 @@ import {
   DeleteDateColumn,
   OneToOne,
   OneToMany,
+  JoinColumn,
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
 import { Swipe } from 'src/swipes/entities/swipe.entity';
@@ -28,7 +29,7 @@ export class Profile {
   @Column()
   age: number;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({ type: 'timestamp', nullable: true })
   last_swiped_at: Date;
 
   @CreateDateColumn()
@@ -42,6 +43,7 @@ export class Profile {
 
   // One-to-One relation with User
   @OneToOne(() => User, (user) => user.profile)
+  @JoinColumn()
   user: User;
 
   // One-to-many relationship with Swipe: One profile can have many swipes

@@ -1,4 +1,9 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreatePremiumDto } from './create-premium.dto';
+// import { PartialType } from '@nestjs/mapped-types';
+// import { CreatePremiumDto } from './create-premium.dto';
 
-export class UpdatePremiumDto extends PartialType(CreatePremiumDto) {}
+import { IsNotEmpty } from 'class-validator';
+
+export class UpdatePremiumDto {
+  @IsNotEmpty({ message: 'status id is required' })
+  status: string;
+}

@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Put,
+} from '@nestjs/common';
 import { PackagesService } from './packages.service';
 import { CreatePackageDto } from './dto/create-package.dto';
 import { UpdatePackageDto } from './dto/update-package.dto';
@@ -22,13 +31,18 @@ export class PackagesController {
     return this.packagesService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updatePackageDto: UpdatePackageDto) {
     return this.packagesService.update(+id, updatePackageDto);
   }
 
+  @Patch(':id')
+  patch(@Param('id') id: string) {
+    return this.packagesService.restore(+id);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.packagesService.remove(+id);
+    return this.packagesService.softDelete(+id);
   }
 }

@@ -3,7 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
-import { IsNull, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { Profile } from 'src/profiles/entities/profile.entity';
 import { Premium } from 'src/premiums/entities/premium.entity';
 
@@ -18,14 +18,12 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    const { username, email, password, profileId, premium_status, premium } =
-      createUserDto;
+    const { username, email, password, profileId } = createUserDto;
 
     const user = this.userRepository.create({
       username,
       email,
       password,
-      premium_status: premium_status ?? true,
     });
 
     // Assign profile if provided
@@ -39,10 +37,10 @@ export class UsersService {
     }
 
     // Assign premium packages if provided
-    if (premium) {
-      const premiumPackages = await this.premiumRepository.findByIds(premium);
-      user.premium = premiumPackages;
-    }
+    // if (premium) {
+    //   const premiumPackages = await this.premiumRepository.findByIds(premium);
+    //   user.premium = premiumPackages;
+    // }
 
     return this.userRepository.save(user);
   }
@@ -55,7 +53,6 @@ export class UsersService {
   findAll() {
     return this.userRepository.find({
       relations: ['profile', 'premium'],
-      where: { deleted_at: IsNull() },
     });
   }
 
@@ -87,12 +84,12 @@ export class UsersService {
     }
 
     // Update premium packages if provided
-    if (updateUserDto.premium) {
-      const premiumPackages = await this.premiumRepository.findByIds(
-        updateUserDto.premium,
-      );
-      user.premium = premiumPackages;
-    }
+    // if (updateUserDto.premium) {
+    //   const premiumPackages = await this.premiumRepository.findByIds(
+    //     updateUserDto.premium,
+    //   );
+    //   user.premium = premiumPackages;
+    // }
 
     return this.userRepository.save(user);
   }
@@ -102,7 +99,7 @@ export class UsersService {
     await this.userRepository.remove(user);
   }
 
-  async softDeleteUser(id: string): Promise<any> {
+  async softDelete(id: string): Promise<any> {
     // Soft delete by ID
     const result = await this.userRepository.softDelete(id);
 
@@ -113,8 +110,8 @@ export class UsersService {
     }
   }
 
-  async restoreUser(id: string): Promise<any> {
-    const result = await this.profileRepository.restore(id);
+  async restore(id: string): Promise<any> {
+    const result = await this.userRepository.restore(id);
 
     if (result.affected === 0) {
       return { message: 'User not found' };

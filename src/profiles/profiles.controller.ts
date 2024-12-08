@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   HttpCode,
+  Put,
 } from '@nestjs/common';
 import { ProfilesService } from './profiles.service';
 import { CreateProfileDto } from './dto/create-profile.dto';
@@ -34,7 +35,7 @@ export class ProfilesController {
     return this.profilesService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   @HttpCode(200)
   update(@Param('id') id: string, @Body() updateProfileDto: UpdateProfileDto) {
     return this.profilesService.update(+id, updateProfileDto);
@@ -43,12 +44,12 @@ export class ProfilesController {
   @Delete(':id')
   @HttpCode(200)
   remove(@Param('id') id: number) {
-    return this.profilesService.softDeleteProfile(+id);
+    return this.profilesService.softDelete(+id);
   }
 
   @Patch('restore/:id')
   @HttpCode(200)
   restore(@Param('id') id: number) {
-    return this.profilesService.restoreProfile(+id);
+    return this.profilesService.restore(+id);
   }
 }

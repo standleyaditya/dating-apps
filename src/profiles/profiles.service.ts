@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { Profile } from './entities/profile.entity';
-import { IsNull, Repository } from 'typeorm';
+import { IsNull, Not, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UsersService } from '../users/users.service';
 
@@ -15,17 +15,24 @@ export class ProfilesService {
   ) {}
 
   async create(createProfileDto: CreateProfileDto): Promise<any> {
-    const { user_id } = createProfileDto;
+    const { user_id, fullname, age, bio, swipe_count, last_swiped_at } =
+      createProfileDto;
     const user = await this.usersService.findOne(user_id);
     if (user) {
       try {
-        this.profileRepository.create(createProfileDto);
-        this.profileRepository.save(createProfileDto);
+        const payload = this.profileRepository.create({
+          user,
+          fullname,
+          age,
+          bio,
+          swipe_count,
+          last_swiped_at,
+        });
+        await this.profileRepository.save(payload);
+        return { code: '201', message: 'Profile Created', Data: payload };
       } catch (error) {
         return { code: error.code, message: error.message };
       }
-      const profile = this.profileRepository.create(createProfileDto);
-      return { code: '201', message: 'Profile Created', Data: profile };
     } else {
       return { code: '400', message: 'User not existed' };
     }
@@ -33,7 +40,8 @@ export class ProfilesService {
 
   async findAll() {
     const profile = await this.profileRepository.find({
-      where: { deleted_at: IsNull() },
+      relations: ['user', 'swipes', 'swipedProfiles'],
+      where: { user: Not(IsNull()) },
     });
     if (profile) {
       return { code: '200', message: 'OK', Data: profile };
@@ -44,7 +52,8 @@ export class ProfilesService {
 
   async findOne(id: number) {
     const profile = await this.profileRepository.findOne({
-      where: { profile_id: id, deleted_at: IsNull() },
+      relations: ['swipes', 'swipedProfiles'],
+      where: { profile_id: id, user: Not(IsNull()) },
     });
     if (profile) {
       return { code: '200', message: 'OK', Data: profile };
@@ -55,7 +64,7 @@ export class ProfilesService {
 
   async update(id: number, updateProfileDto: UpdateProfileDto) {
     const profile = await this.profileRepository.findOne({
-      where: { profile_id: id, deleted_at: IsNull() },
+      where: { profile_id: id, user: Not(IsNull()) },
     });
     if (profile) {
       Object.assign(profile, updateProfileDto);
@@ -64,24 +73,24 @@ export class ProfilesService {
     } else {
       return { code: '400', message: 'Profile not found', Data: profile };
     }
-
-    // Update basic fields
   }
 
-  async softDeleteProfile(id: number): Promise<any> {
+  async softDelete(id: number): Promise<any> {
     // Soft delete by ID
     const result = await this.profileRepository.softDelete(id);
 
     if (result.affected === 0) {
       return { code: '400', message: 'Profile not found', Data: result };
     }
+    return { code: '200', message: 'Profile removed', Data: result };
   }
 
-  async restoreProfile(id: number): Promise<any> {
+  async restore(id: number): Promise<any> {
     const result = await this.profileRepository.restore(id);
 
     if (result.affected === 0) {
       return { code: '400', message: 'Profile not found', Data: result };
     }
+    return { code: '200', message: 'Profile restored', Data: result };
   }
 }

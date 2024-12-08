@@ -6,7 +6,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
-  ManyToMany,
+  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -20,7 +20,7 @@ export class Package {
   @Column()
   price: number;
 
-  @Column()
+  @Column({ nullable: true })
   desc: string;
 
   @CreateDateColumn()
@@ -33,6 +33,6 @@ export class Package {
   deleted_at: Date;
 
   // Many-to-many relationship with Premium
-  @ManyToMany(() => Premium, (premium) => premium.packages)
+  @OneToMany(() => Premium, (premium) => premium.packages)
   premiums: Premium[];
 }

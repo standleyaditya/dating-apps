@@ -4,8 +4,11 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  ManyToMany,
   JoinTable,
+  Column,
+  ManyToOne,
+  UpdateDateColumn,
+  DeleteDateColumn,
 } from 'typeorm';
 
 @Entity()
@@ -13,14 +16,30 @@ export class Premium {
   @PrimaryGeneratedColumn()
   premium_id: number;
 
-  @CreateDateColumn()
-  created_at: Date;
+  @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  subscriptionDate: Date;
+
+  @Column({ default: 'active' })
+  status: string;
+
+  @UpdateDateColumn()
+  updated_at: Date;
+
+  @DeleteDateColumn()
+  deleted_at: Date;
+
+  // @Column()
+  // user_id: string;
+
+  // @Column()
+  // package_id: number;
 
   // Many-to-many relationship with User
-  @ManyToMany(() => User, (user) => user.premium)
-  users: User[];
+  @ManyToOne(() => User, (user) => user.premium)
+  @JoinTable()
+  user: User;
 
-  @ManyToMany(() => Package, (packageEntity) => packageEntity.premiums)
+  @ManyToOne(() => Package, (packages) => packages.premiums)
   @JoinTable() // This will create a join table to manage the many-to-many relationship
-  packages: Package[];
+  packages: Package;
 }

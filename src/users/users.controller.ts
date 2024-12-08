@@ -38,11 +38,11 @@ export class UsersController {
 
   @Patch(':id')
   restore(@Param('id') id: string) {
-    return this.usersService.restoreUser(id);
+    return this.usersService.restore(id);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.usersService.softDeleteUser(id);
+    return this.usersService.softDelete(id);
   }
 }

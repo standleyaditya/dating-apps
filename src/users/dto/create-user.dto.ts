@@ -15,10 +15,4 @@ export class CreateUserDto {
 
   @IsOptional()
   profileId?: number;
-
-  @IsOptional()
-  premium_status?: boolean;
-
-  @IsOptional()
-  premium?: string[]; // Accepts an array of Premium IDs (UUIDs) if provided
 }

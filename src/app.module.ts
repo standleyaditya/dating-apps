@@ -16,8 +16,6 @@ import { Profile } from './profiles/entities/profile.entity';
 import { Swipe } from './swipes/entities/swipe.entity';
 import { CacheModule } from '@nestjs/cache-manager';
 import * as redisStore from 'cache-manager-redis-store';
-// import typeorm from './config/typeorm.config';
-// import { User } from './users//entities/user.entity';
 
 ConfigModule.forRoot();
 @Module({
