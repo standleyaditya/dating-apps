@@ -71,14 +71,14 @@ swipe {
 #
 ### API Endpoints
 
-#AUTH
+# AUTH
 | HTTP Verbs | Endpoints | Action |
 | --- | --- | --- |
 | GET | /auth/login | Login to existing user account |
 | POST | /auth/signup | Create new Account |
 | POST | /auth/signout | Sign out from session |
 
-#USERS
+# USERS
 | HTTP Verbs | Endpoints | Action |
 | --- | --- | --- |
 | GET | /users/ | Get all users data |
@@ -88,7 +88,7 @@ swipe {
 | PATCH | /users/:id | Restore user that have been soft deleted |
 | DELETE | /users/:id | Soft delete user |
 
-#PROFILES
+# PROFILES
 | HTTP Verbs | Endpoints | Action |
 | --- | --- | --- |
 | GET | /profiles/ | Get all profile data |
@@ -98,7 +98,7 @@ swipe {
 | PATCH | /profiles/:id | Restore profile that have been soft deleted |
 | DELETE | /profiles/:id | Soft delete profile |
 
-#PACKAGES
+# PACKAGES
 | HTTP Verbs | Endpoints | Action |
 | --- | --- | --- |
 | GET | /packages/ | Get all package data |
@@ -108,15 +108,25 @@ swipe {
 | PATCH | /packages/:id | Restore package that have been soft deleted |
 | DELETE | /packages/:id | Soft delete package |
 
-#PREMIUMS (for storing user package data)
+# PREMIUMS (for storing user package data)
 | HTTP Verbs | Endpoints | Action |
 | --- | --- | --- |
-| GET | /premiums/ | Get all premium data |
+| GET | /premiums/ | Get all premiums data |
 | GET | /premiums/:id | Get premium by id |
 | POST | /premiums/ | Create premium |
 | PUT | /premiums/:id | Edit your premium attribute |
 | PATCH | /premiums/:id | Restore premium that have been soft deleted |
 | DELETE | /premiums/:id | Soft delete premium |
+
+# SWIPES (for storing user swipes data)
+| HTTP Verbs | Endpoints | Action |
+| --- | --- | --- |
+| GET | /swipes/ | Get all swipes data |
+| GET | /swipes/:id | Get swipe by id |
+| POST | /swipes/ | Create swipe |
+| PUT | /swipes/:id | Edit your swipe attribute |
+| PATCH | /swipes/:id | Restore swipe that have been soft deleted |
+| DELETE | /swipes/:id | Soft delete swipe |
 
 ## Project setup
 
