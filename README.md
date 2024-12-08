@@ -25,7 +25,7 @@
 ## Description
 
 The Structure I'm using is 5 table that includes :
-```bash
+```json
 User {
   user_id : UUID;
   username : string;
@@ -69,6 +69,26 @@ swipe {
 }
 ```
 #
+
+## Project setup
+
+```bash
+$ npm install
+$ docker-compose up
+$ npm migration:generate
+$ npm migration:run
+```
+
+## Compile and run the project
+
+```bash
+# development
+$ npm run start (will auto start db migration)
+
+# watch mode
+$ npm run start:dev
+```
+
 ### API Endpoints
 
 #### AUTH
@@ -128,21 +148,6 @@ swipe {
 | PATCH | /swipes/:id | Restore swipe that have been soft deleted |
 | DELETE | /swipes/:id | Soft delete swipe |
 
-## Project setup
+### API DOCUMENTATION
 
-```bash
-$ npm install
-$ docker-compose up
-$ npm migration:generate
-$ npm migration:run
-```
 
-## Compile and run the project
-
-```bash
-# development
-$ npm run start (will auto start db migration)
-
-# watch mode
-$ npm run start:dev
-```
