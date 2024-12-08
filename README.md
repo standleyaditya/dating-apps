@@ -25,7 +25,7 @@
 ## Description
 
 The Structure I'm using is 5 table that includes :
-# Package {
+- Package {
   id : int;
   name : string;
   price: int;
