@@ -25,7 +25,8 @@
 ## Description
 
 The Structure I'm using is 5 table that includes :
-- Package {
+```bash
+Package {
   id : int;
   name : string;
   price: int;
@@ -34,6 +35,7 @@ The Structure I'm using is 5 table that includes :
   updated_at : timestamp;
   deleted_at : timestamp;
 }
+```
 #
 
 ## Project setup
