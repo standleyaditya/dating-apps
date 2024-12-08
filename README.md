@@ -84,9 +84,9 @@ swipe {
 | GET | /users/ | Get all users data |
 | GET | /users/:id | Get user by id |
 | POST | /users/ | Create User |
-| PUT | /usesr/ | Edit your user attribute |
-| PATCH | /users/ | Restore user that have been soft deleted |
-| DELETE | /users/ | Soft delete user |
+| PUT | /usesr/:id | Edit your user attribute |
+| PATCH | /users/:id | Restore user that have been soft deleted |
+| DELETE | /users/:id | Soft delete user |
 
 #PROFILES
 | HTTP Verbs | Endpoints | Action |
@@ -94,22 +94,44 @@ swipe {
 | GET | /profiles/ | Get all profile data |
 | GET | /profiles/:id | Get profile by id |
 | POST | /profiles/ | Create profile |
-| PUT | /profiles/ | Edit your profile attribute |
-| PATCH | /profiles/ | Restore profile that have been soft deleted |
-| DELETE | /profiles/ | Soft delete profile |
+| PUT | /profiles/:id | Edit your profile attribute |
+| PATCH | /profiles/:id | Restore profile that have been soft deleted |
+| DELETE | /profiles/:id | Soft delete profile |
+
+#PACKAGES
+| HTTP Verbs | Endpoints | Action |
+| --- | --- | --- |
+| GET | /packages/ | Get all package data |
+| GET | /packages/:id | Get package by id |
+| POST | /packages/ | Create package |
+| PUT | /packages/:id | Edit your package attribute |
+| PATCH | /packages/:id | Restore package that have been soft deleted |
+| DELETE | /packages/:id | Soft delete package |
+
+#PREMIUMS (for storing user package data)
+| HTTP Verbs | Endpoints | Action |
+| --- | --- | --- |
+| GET | /premiums/ | Get all premium data |
+| GET | /premiums/:id | Get premium by id |
+| POST | /premiums/ | Create premium |
+| PUT | /premiums/:id | Edit your premium attribute |
+| PATCH | /premiums/:id | Restore premium that have been soft deleted |
+| DELETE | /premiums/:id | Soft delete premium |
 
 ## Project setup
 
 ```bash
 $ npm install
 $ docker-compose up
+$ npm migration:generate
+$ npm migration:run
 ```
 
 ## Compile and run the project
 
 ```bash
 # development
-$ npm run start
+$ npm run start (will auto start db migration)
 
 # watch mode
 $ npm run start:dev
