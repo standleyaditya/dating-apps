@@ -153,7 +153,7 @@ $ npm run start:dev (will auto start db migration)
 #### AUTH
 
 - Login
-```
+```http
 Url : {url}/auth/login
 Header : {}
 Request :
