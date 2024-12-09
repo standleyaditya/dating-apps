@@ -229,7 +229,7 @@ GET  /profiles/:id
 ```http
 POST /profiles/
 {
-  "user_id" : "UUID"
+  "user_id" : "UUID",
   "fullname" : "yourfullname",
   "bio" : "yourbio",
   "age" : 21
@@ -239,7 +239,7 @@ POST /profiles/
 ```http
 PUT /profiles/:id
 {
-  "user_id" : "UUID"
+  "user_id" : "UUID",
   "fullname" : "yourfullname",
   "bio" : "yourbio",
   "age" : 21
@@ -250,8 +250,115 @@ PUT /profiles/:id
 DELETE /profiles/:id
 {}
 ```
-- Restore User
+- Restore profiles
 ```http
 PATCH /profiles/:id
+{}
+```
+#### PACKAGES
+
+- Get
+```http
+GET /packages/
+{}
+
+GET  /packages/:id
+{}
+```
+
+- Create
+```http
+POST /packages/
+{
+  "name" : "packagename",
+  "price" : 10000,
+  "desc" : "itemdesc"
+}
+```
+- Update
+```http
+PUT /packages/:id
+{
+  "name" : "packagename",
+  "price" : 10000,
+  "desc" : "itemdesc"
+}
+```
+- Soft Delete
+```http
+DELETE /packages/:id
+{}
+```
+- Restore package
+```http
+PATCH /packages/:id
+{}
+```
+
+#### PREMIUMS
+
+- Get
+```http
+GET /premiums/
+{}
+
+GET  /premiums/:id
+{}
+```
+
+- Create
+```http
+POST /premiums/
+{
+  "user_id" : "uuid",
+  "package_id" : 2
+}
+```
+- Update
+```http
+PUT /premiums/:id
+{
+  "status" : "active" | "inactive"
+}
+```
+- Soft Delete
+```http
+DELETE /premiums/:id
+{}
+```
+- Restore premium
+```http
+PATCH /premiums/:id
+{}
+```
+
+#### SWIPES
+
+- Get
+```http
+GET /swipes/
+{}
+
+GET  /swipes/:id
+{}
+```
+
+- Create
+```http
+POST /swipes/
+{
+  "profile_id" : 14
+}
+```
+- Update
+```http
+PATCH /swipes/:id
+{
+  "status" : "pass" | "like"
+}
+```
+- Soft Delete
+```http
+DELETE /swipes/:id
 {}
 ```
