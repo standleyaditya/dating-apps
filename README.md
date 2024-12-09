@@ -153,10 +153,8 @@ $ npm run start:dev (will auto start db migration)
 #### AUTH
 
 - Login
-```API Blueprint
-Url : {url}/auth/login
-Header : {}
-Request :
+```http
+POST {url}/auth/login
 {
   "email" : "youremail@email.com",
   "password" : "yourpassword"
@@ -164,9 +162,7 @@ Request :
 ```
 - Sign Up
 ```
-Url : {url}/auth/signup
-Header : {}
-Request :
+POST {url}/auth/signup
 {
   "username" : "yourusername",
   "email" : "youremail@email.com",
