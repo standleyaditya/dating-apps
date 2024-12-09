@@ -175,7 +175,7 @@ POST /auth/signout
 {}
 ```
 
-#### LOGIN
+#### USERS
 
 - Get
 ```http
@@ -212,5 +212,46 @@ DELETE /users/:id
 - Restore User
 ```http
 PATCH /users/:id
+{}
+```
+#### PROFILES
+
+- Get
+```http
+GET /profiles/
+{}
+
+GET  /profiles/:id
+{}
+```
+
+- Create
+```http
+POST /profiles/
+{
+  "user_id" : "UUID"
+  "fullname" : "yourfullname",
+  "bio" : "yourbio",
+  "age" : 21
+}
+```
+- Update
+```http
+PUT /profiles/:id
+{
+  "user_id" : "UUID"
+  "fullname" : "yourfullname",
+  "bio" : "yourbio",
+  "age" : 21
+}
+```
+- Soft Delete
+```http
+DELETE /profiles/:id
+{}
+```
+- Restore User
+```http
+PATCH /profiles/:id
 {}
 ```
