@@ -154,20 +154,63 @@ $ npm run start:dev (will auto start db migration)
 
 - Login
 ```http
-POST {url}/auth/login
+POST /auth/login
 {
   "email" : "youremail@email.com",
   "password" : "yourpassword"
 }
 ```
 - Sign Up
-```
-POST {url}/auth/signup
+```http
+POST /auth/signup
 {
   "username" : "yourusername",
   "email" : "youremail@email.com",
   "password" : "yourpassword"
 }
 ```
+- Sign Out
+```http
+POST /auth/signout
+{}
+```
 
+#### LOGIN
 
+- Get
+```http
+GET /users/
+{}
+
+GET  /users/:id
+{}
+```
+
+- Create
+```http
+POST /users/
+{
+  "username" : "yourusername",
+  "email" : "youremail@email.com",
+  "password" : "yourpassword"
+}
+```
+- Update
+```http
+PUT /users/:id
+{
+  "username" : "yourusername",
+  "email" : "youremail@email.com",
+  "password" : "yourpassword"
+}
+```
+- Soft Delete
+```http
+DELETE /users/:id
+{}
+```
+- Restore User
+```http
+PATCH /users/:id
+{}
+```
