@@ -318,7 +318,7 @@ POST /premiums/
 ```http
 PUT /premiums/:id
 {
-  "status" : "active" | "inactive"
+  "status" : "active || inactive"
 }
 ```
 - Soft Delete
@@ -354,7 +354,7 @@ POST /swipes/
 ```http
 PATCH /swipes/:id
 {
-  "status" : "pass" | "like"
+  "status" : "pass || like"
 }
 ```
 - Soft Delete
