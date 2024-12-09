@@ -150,4 +150,28 @@ $ npm run start:dev (will auto start db migration)
 
 ### API DOCUMENTATION
 
+#### AUTH
+
+- Login
+```
+Url : {url}/auth/login
+Header : {}
+Request :
+{
+  "email" : "youremail@email.com",
+  "password" : "yourpassword"
+}
+```
+- Sign Up
+```
+Url : {url}/auth/signup
+Header : {}
+Request :
+{
+  "username" : "yourusername",
+  "email" : "youremail@email.com",
+  "password" : "yourpassword"
+}
+```
+
 
